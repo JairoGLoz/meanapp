@@ -5,8 +5,8 @@ import {registerEvents} from './game.events';
 
 var GameSchema = new mongoose.Schema({
   name: String,
-  info: String,
-  active: Boolean
+  platform: String,
+  genre: String
 });
 
 registerEvents(GameSchema);
