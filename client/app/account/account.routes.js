@@ -1,29 +1,34 @@
 'use strict';
 
-export default function routes($routeProvider) {
+export default function routes($stateProvider) {
   'ngInject';
 
-  $routeProvider.when('/login', {
+  $stateProvider.state('login', {
+    url: '/login',
     template: require('./login/login.pug'),
     controller: 'LoginController',
     controllerAs: 'vm'
   })
-    .when('/logout', {
-      name: 'logout',
-      referrer: '/',
+    .state('logout', {
+      url: '/logout?referrer',
+      referrer: 'main',
       template: '',
-      controller($location, $route, Auth) {
-        var referrer = $route.current.params.referrer || $route.current.referrer || '/';
+      controller($state, Auth) {
+        'ngInject';
+
+        var referrer = $state.params.referrer || $state.current.referrer || 'main';
         Auth.logout();
-        $location.path(referrer);
+        $state.go(referrer);
       }
     })
-    .when('/signup', {
+    .state('signup', {
+      url: '/signup',
       template: require('./signup/signup.pug'),
       controller: 'SignupController',
       controllerAs: 'vm'
     })
-    .when('/settings', {
+    .state('settings', {
+      url: '/settings',
       template: require('./settings/settings.pug'),
       controller: 'SettingsController',
       controllerAs: 'vm',

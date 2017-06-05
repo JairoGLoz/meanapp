@@ -7,8 +7,9 @@ import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 
 import 'angular-socket-io';
-const ngRoute = require('angular-route');
 
+import uiRouter from 'angular-ui-router';
+import uiBootstrap from 'angular-ui-bootstrap';
 import 'angular-validation-match';
 
 import {
@@ -27,8 +28,9 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
-angular.module('meanappApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', ngRoute, _Auth,
-  account, admin, 'validation.match', navbar, footer, main, constants, socket, util
+angular.module('meanappApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
+  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
+  socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

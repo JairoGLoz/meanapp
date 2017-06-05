@@ -1,5 +1,5 @@
 import angular from 'angular';
-const ngRoute = require('angular-route');
+import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
 
 export class MainController {
@@ -38,7 +38,7 @@ export class MainController {
   }
 }
 
-export default angular.module('meanappApp.main', [ngRoute])
+export default angular.module('meanappApp.main', [uiRouter])
   .config(routing)
   .component('main', {
     template: require('./main.pug'),

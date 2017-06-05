@@ -13,9 +13,9 @@ export default class LoginController {
 
 
   /*@ngInject*/
-  constructor(Auth, $location) {
+  constructor(Auth, $state) {
     this.Auth = Auth;
-    this.$location = $location;
+    this.$state = $state;
   }
 
   login(form) {
@@ -28,7 +28,7 @@ export default class LoginController {
       })
         .then(() => {
           // Logged in, redirect to home
-          this.$location.path('/');
+          this.$state.go('main');
         })
         .catch(err => {
           this.errors.login = err.message;

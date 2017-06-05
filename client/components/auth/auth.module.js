@@ -16,7 +16,8 @@ import {
 import {
   UserResource
 } from './user.service';
-const ngRoute = require('angular-route');
+
+import uiRouter from 'angular-ui-router';
 
 function addInterceptor($httpProvider) {
   'ngInject';
@@ -24,7 +25,7 @@ function addInterceptor($httpProvider) {
   $httpProvider.interceptors.push('authInterceptor');
 }
 
-export default angular.module('meanappApp.auth', [constants, util, ngCookies, ngRoute])
+export default angular.module('meanappApp.auth', [constants, util, ngCookies, uiRouter])
   .factory('authInterceptor', authInterceptor)
   .run(routerDecorator)
   .factory('Auth', AuthService)

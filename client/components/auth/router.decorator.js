@@ -1,10 +1,10 @@
 'use strict';
 
-export function routerDecorator($rootScope, $location, Auth) {
+export function routerDecorator($rootScope, $state, Auth) {
   'ngInject';
   // Redirect to login if route requires auth and the user is not logged in, or doesn't have required role
 
-  $rootScope.$on('$routeChangeStart', function(event, next) {
+  $rootScope.$on('$stateChangeStart', function(event, next) {
     if(!next.authenticate) {
       return;
     }
@@ -19,7 +19,7 @@ export function routerDecorator($rootScope, $location, Auth) {
           event.preventDefault();
           return Auth.isLoggedIn()
             .then(is => {
-              $location.path(is ? '/' : '/login');
+              $state.go(is ? 'main' : 'login');
             });
         });
     } else {
@@ -30,7 +30,8 @@ export function routerDecorator($rootScope, $location, Auth) {
           }
 
           event.preventDefault();
-          $location.path('/login');
+
+          $state.go('login');
         });
     }
   });

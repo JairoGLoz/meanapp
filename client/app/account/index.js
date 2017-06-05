@@ -1,21 +1,25 @@
 'use strict';
 
 import angular from 'angular';
-const ngRoute = require('angular-route');
+
+import uiRouter from 'angular-ui-router';
 
 import routing from './account.routes';
 import login from './login';
 import settings from './settings';
 import signup from './signup';
+import oauthButtons from '../../components/oauth-buttons';
 
-export default angular.module('meanappApp.account', [ngRoute, login, settings, signup])
+export default angular.module('meanappApp.account', [uiRouter, login, settings, signup,
+  oauthButtons
+])
   .config(routing)
   .run(function($rootScope) {
     'ngInject';
 
-    $rootScope.$on('$routeChangeStart', function(event, next, current) {
-      if(next.name === 'logout' && current && current.originalPath && !current.authenticate) {
-        next.referrer = current.originalPath;
+    $rootScope.$on('$stateChangeStart', function(event, next, nextParams, current) {
+      if(next.name === 'logout' && current && current.name && !current.authenticate) {
+        next.referrer = current.name;
       }
     });
   })
